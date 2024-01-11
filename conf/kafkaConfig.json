@@ -1,0 +1,64 @@
+{
+  "kafkaParameters": [
+    {
+      "key": "bootstrap.servers",
+      "value": "pkc-ymrq7.us-east-2.aws.confluent.cloud:9092",
+      "isDynamic": false,
+      "paramType": "String"
+    },
+    {
+      "key": "sasl.jaas.config",
+      "value": "org.apache.kafka.common.security.plain.PlainLoginModule required username='GOLAZJ6N6PUHIORP' password='hZOBT1fZdIBPid++edRYOHOchngSrdl13sihFmFxTLgdF49DHiFJt4XYGN7KyrvP';",
+      "isDynamic": false,
+      "paramType": "String"
+    },
+    {
+      "key": "kafkaProducerConfiguration%group.id",
+      "value": "group-2",
+      "isDynamic": false,
+      "paramType": "String"
+    },
+    {
+      "key": "kafkaProducerConfiguration%linger.ms",
+      "value": 60,
+      "isDynamic": true,
+      "paramType": "Int"
+    },
+    {
+      "key": "kafkaProducerConfiguration%batch.size",
+      "value": 24576,
+      "isDynamic": true,
+      "paramType": "Int"
+    },
+    {
+      "key": "kafkaProducerConfiguration%compression.type",
+      "value": "snappy",
+      "isDynamic": false,
+      "paramType": "String"
+    },
+    {
+      "key": "kafkaConsumerConfiguration%poolTimeIntervalMs",
+      "value": 14600,
+      "isDynamic": true,
+      "paramType": "Int"
+    },
+    {
+      "key": "kafkaConsumerConfiguration%fetch.max.bytes",
+      "value": 52428800,
+      "isDynamic": true,
+      "paramType": "Int"
+    },
+    {
+      "key": "kafkaConsumerConfiguration%max.poll.records",
+      "value":120,
+      "isDynamic": true,
+      "paramType": "Int"
+    },
+    {
+      "key": "kafkaConsumerConfiguration%max.partition.fetch.bytes",
+      "value": 1048576,
+      "isDynamic": true,
+      "paramType": "Int"
+    }
+  ]
+}

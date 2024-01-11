@@ -1,0 +1,116 @@
+{
+  "version": "0.7",
+  "date":"2023-04-07",
+  "runId":"480",
+  "debugLogLevel":"debug",
+  "target":"XLARGE5",
+  "storageConfig": {
+    "s3Bucket":"aideo-tech-mlops",
+    "s3RootFolder":"mlops",
+    "s3RequestFolder": "requestsProd",
+    "s3FeedbackFolder":"feedbacksProd",
+    "s3ContextDocumentFolder":"contextDocument",
+    "encryptedS3AccessKey":"Povkoctu4stceGBM8Iy0nklPuku8uzw7XBH5/j9Vfpg=",
+    "encryptedS3SecretKey":"eDAl0qAHGQRlH9uFX10lMbTLTen2I6DTbInG/QpUWkNJ/oJ3i0URtff/R4KL7HAa"
+  },
+  "databasesConfig": [
+    {
+      "name":"ai-ml",
+      "host":"aiml-training-data-db.cobtnm3ty8q3.us-east-2.rds.amazonaws.com",
+      "port":5432,
+      "dbName":"gemini-data-mining",
+      "user":"postgres",
+      "encryptedPwd": "JKTtVHtqXouKbwusCsdG/IaTUI/U7xmpgw0EwFkQBZY=",
+      "region":"us-east-2"
+    },
+    {
+      "name": "datamart",
+      "host": "ml-virtual-coder-onboarding.cluster-ro-cobtnm3ty8q3.us-east-2.rds.amazonaws.com",
+      "port": 5432,
+      "dbName": "onboarding",
+      "user": "onboarding",
+      "encryptedPwd": "wtvVzCioEJ",
+      "region": "us-east-2"
+    }
+  ],
+  "executorConfig": {
+    "dlDevice":"cpu",
+    "dlEngine":"MXNet",
+    "saveModelMode":"epoch",
+    "batchSize":2,
+    "numDevices":16,
+    "numThreads":32,
+    "maxRssMemMB":52500,
+    "maxHeapMemMB":44000,
+    "maxNonHeapMemMB":3200
+  },
+  "preProcessConfig": {
+    "minLabelFreq":1,
+    "maxLabelFreq":1024,
+    "numSplits":64,
+    "customers":[],
+    "subModels":[],
+    "vocabularyType":"TF96",
+    "contextualEnabled":true
+  },
+  "preTrainConfig": {
+    "modelPrefix":"Pre-trained-Bert",
+    "transformer": "Bert-base",
+    "isCustomerPretrainBlock":false,
+    "sentenceBuilder":"ctxTxtNSentencesBuilder",
+    "numSentencesPerDoc":2,
+    "tokenizer": "WordPiecesTokenizer",
+    "predictor":"clsEmbedding",
+    "clsAggregation":"concatenate",
+    "epochs":3,
+    "numSplits":10,
+    "maxNumRecords":-1,
+    "maxMaskingSize":12,
+    "optimizer": {
+      "convergenceLossRatio":0.997,
+      "optType":"adam",
+      "baseLr":0.00008,
+      "numSteps":10,
+      "epsilon":0.0000001
+    }
+  },
+  "classifyConfig": {
+    "modelId":"A-471",
+    "modelPrefix":"Trained-Bert",
+    "weightInitialization": "TruncatedNormal",
+    "lossFunction":"mlopsLoss",
+    "dlModel": "MLP2",
+    "dlLayout":[192,32],
+    "augmentation":"randomUNK",
+    "trainValidateRatio":0.9,
+    "epochs":24,
+    "numSplits":8,
+    "minNumRecordsPerLabel":20,
+    "maxNumRecordsPerLabel":128,
+    "optimizer": {
+      "convergenceLossRatio":0.998,
+      "optType":"adam",
+      "baseLr":0.001,
+      "numSteps":10,
+      "epsilon":0.000001
+    }
+  },
+ "evaluationConfig": {
+    "classifierOnly":true,
+    "subModelFilterThreshold":0.0,
+    "s3RequestPath": "requestsProd/TEST",
+    "s3FeedbackPath":"feedbacksProd/TEST",
+    "ingestIntervalMs": 200,
+    "numRequestPerSubModel":8192,
+    "preloadedSubModels":true,
+    "compareEnabled":true
+  },
+  "runtimeConfig": {
+    "predictionStorage": "none",
+    "table": "bert_predictions",
+    "requestTopic": "ml-request-mlops",
+    "responseTopic": "ml-response-mlops",
+    "feedbackTopic":"ml-feedback-mlops",
+    "ackTopic":"ml-ack-mlops"
+  }
+}
